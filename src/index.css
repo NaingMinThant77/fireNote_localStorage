@@ -1,0 +1,93 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-border {
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto;
+    border: 1px solid cornflowerblue;
+    padding: 30px 20px;
+    border-radius: 2rem;
+    box-sizing: border-box;
+}
+.card {
+    background-color: cornflowerblue;
+    padding: 20px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card-ctr {
+    padding: 2px 20px;
+    margin-top: 20px;
+    color: white;
+}
+
+input {
+    width: 60%;
+    padding: 10px 4px;
+    font-size: 17px;
+    border: none;
+    outline: none;
+    background-color: white;
+    border-radius: 12px;
+}
+
+.submit-btn {
+    background-color: white;
+    color: cornflowerblue;
+    border: none;
+    padding: 10px 6px;
+    border-radius: 17px;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav p {
+    cursor: default;
+    background-color: cornflowerblue;
+    color: white;
+}
+
+.logo {
+    color: cornflowerblue;
+    font-size: 30px;
+}
+
+.message {
+    text-align: center;
+    color: cornflowerblue;
+    font-size: 20px;
+    max-width: 20px 0;
+    font-style: italic;
+    font-weight: 600;
+}
+
+.error {
+    color: red;
+}
+
+svg {
+    cursor: pointer;
+}
+
+.intro,
+.intro h1 {
+    color: cornflowerblue;
+    text-align: center;
+}
+
+
