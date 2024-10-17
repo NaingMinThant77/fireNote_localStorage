@@ -2,7 +2,6 @@ import React from 'react';
 
 const FilterDiv = ({ handleFilterChange, clearAllNotes, activeFilter }) => {
     return (
-        <div>
             <div className="card">
                 <div className="filter-div">
                     <span className={activeFilter === 'all' ? 'active' : ''} onClick={() => handleFilterChange('all')}>
@@ -17,7 +16,6 @@ const FilterDiv = ({ handleFilterChange, clearAllNotes, activeFilter }) => {
                 </div>
                 <button className="clear-btn" onClick={clearAllNotes}>Clear All</button>
             </div>
-        </div>
     );
 };
 

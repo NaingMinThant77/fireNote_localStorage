@@ -21,7 +21,7 @@ const App = () => {
         throw new Error("Cannot connect to Firebase.");
       }
       const notesData = await response.json();
-      console.log('Fetched notes data:', notesData); // Debug log
+      // console.log('Fetched notes data:', notesData); // Debug log
 
       // Check if notesData is valid
       const modifiedNotes = notesData ? Object.entries(notesData).map(([key, value]) => ({
@@ -76,12 +76,16 @@ const App = () => {
       {filter === 'complete' && filteredNotes.length === 0 && (
         <p className='message'>There are no completed notes.</p>
       )}
-      <div className='overflow-ctr'>
-       {!loading && !error && filteredNotes.map((note, index) => (
-        <Note key={index} note={note} getNotes={getNotes}  />
-        ))}
-      </div>
-      {notes.length === 0 && !loading && <Intro />}
+      {notes.length > 0 ? (
+        <div className='overflow-ctr'>
+          {!loading && !error && filteredNotes.map((note, index) => (
+            <Note key={index} note={note} getNotes={getNotes} />
+          ))}
+        </div>
+      ) : (
+        <Intro />
+      )}
+
     </section>
   );
 };
