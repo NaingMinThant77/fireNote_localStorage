@@ -3,18 +3,16 @@ import React, { useState } from 'react'
 const AddNote = ({ getNotes }) => {
     const [note, setNote] = useState("");
 
-    const addNote = async (e) => {     //default - get method                         //anything.json
+    const addNote = async (e) => {
         e.preventDefault();
-        try {
+        try {                     //default - get method                  //anything.json
             await fetch("https://firenote-bdeab-default-rtdb.firebaseio.com/notes.json", {
                 method: "POST",
-                body: JSON.stringify(note),
+                body: JSON.stringify({ note, isChecked: false }),
                 headers: {
                     "Content-Type": "application/json" //case-sensitive
                 }
             });
-            // const resData = await response.json()
-            // console.log(resData);
             setNote("");
             getNotes();
         } catch (err) {
