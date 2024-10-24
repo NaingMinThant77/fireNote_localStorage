@@ -11,41 +11,31 @@ const App = () => {
   const [error, setError] = useState(null);
   const [filter, setFilter] = useState('all');
 
-  useEffect(() => { getNotes(); }, [filter]); // Refresh notes based on filter change
+  useEffect(() => {
+    getNotes();
+  }, [filter]);
 
-  const getNotes = async () => {
+  const getNotes = () => {
     setLoading(true);
     try {
-      const response = await fetch("https://firenote-bdeab-default-rtdb.firebaseio.com/notes.json");
-      if (!response.ok) {
-        throw new Error("Cannot connect to Firebase.");
+      const storedNotes = localStorage.getItem('notes');
+      if (storedNotes) {
+        setNotes(JSON.parse(storedNotes));
+      } else {
+        setNotes([]);
       }
-      const notesData = await response.json();
-      // console.log('Fetched notes data:', notesData); // Debug log
-
-      // Check if notesData is valid
-      const modifiedNotes = notesData ? Object.entries(notesData).map(([key, value]) => ({
-        key,
-        note: value.note || '', // Corrected here
-        isChecked: value.isChecked || false
-      })) : [];
-      // console.log('Modified notes:', modifiedNotes); // Debug log
-      setNotes(modifiedNotes);
     } catch (err) {
-      // console.error('Error fetching notes:', err); // Debug log
-      setError(err.message);
+      setError('Failed to load notes from local storage.');
     }
     setLoading(false);
   };
 
-  const clearAllNotes = async () => {
+  const clearAllNotes = () => {
     try {
-      await fetch("https://firenote-bdeab-default-rtdb.firebaseio.com/notes.json", {
-        method: "DELETE"
-      });
-      setNotes([]); // Clear local notes state
+      localStorage.removeItem('notes');
+      setNotes([]);
     } catch (err) {
-      alert("Failed to clear all notes");
+      alert('Failed to clear all notes.');
     }
   };
 
@@ -54,9 +44,9 @@ const App = () => {
   };
 
   const filteredNotes = notes.filter((note) => {
-    if (filter === 'complete') return note.isChecked;
-    if (filter === 'pending') return !note.isChecked;
-    return true; // 'all' case
+    if (filter === 'complete') return note.isChecked === true; // Check for completed notes
+    if (filter === 'pending') return note.isChecked === false; // Check for pending notes
+    return true; // Show all notes when 'all' is selected
   });
 
   return (
@@ -85,7 +75,6 @@ const App = () => {
       ) : (
         <Intro />
       )}
-
     </section>
   );
 };
